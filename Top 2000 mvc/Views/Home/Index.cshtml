@@ -23,9 +23,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Jaar)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PlaatsVorigjaar)
-        </th>
         <th></th>
     </tr>
 
@@ -42,9 +39,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Jaar)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PlaatsVorigjaar)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

@@ -19,6 +19,5 @@ namespace Top_2000_mvc.Models
         public string Artiest { get; set; }
         public int Jaar { get; set; }
         public int Plaats { get; set; }
-        public int PlaatsVorigjaar { get; set; }
     }
 }

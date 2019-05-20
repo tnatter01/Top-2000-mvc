@@ -14,7 +14,6 @@
           <Property Name="Artiest" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Jaar" Type="int" Nullable="false" />
           <Property Name="Plaats" Type="int" Nullable="false" />
-          <Property Name="PlaatsVorigjaar" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="Top2000ModelsStoreContainer">
           <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
@@ -33,7 +32,6 @@
           <Property Name="Artiest" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Jaar" Type="Int32" Nullable="false" />
           <Property Name="Plaats" Type="Int32" Nullable="false" />
-          <Property Name="PlaatsVorigjaar" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityContainer Name="Top2000Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Table" EntityType="Top2000.Models.Liedje" />
@@ -52,7 +50,6 @@
                 <ScalarProperty Name="Artiest" ColumnName="Artiest" />
                 <ScalarProperty Name="Jaar" ColumnName="Jaar" />
                 <ScalarProperty Name="Plaats" ColumnName="Plaats" />
-                <ScalarProperty Name="PlaatsVorigjaar" ColumnName="PlaatsVorigjaar" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
