@@ -40,10 +40,13 @@
         <td>
             @Html.DisplayFor(modelItem => item.Jaar)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
+        @if (ViewContext.HttpContext.User.IsInRole("Beheerder"))
+        {
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>   }
+       
     </tr>
 }
 
