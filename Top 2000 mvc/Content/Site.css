@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    color: #9d9d9d;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -22,3 +23,39 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/*p.Plaats {
+    height: 35px;
+    width: 35px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 50%;
+    background: #ff0707;
+    color: white;
+    font-weight: bold;
+}*/
+
+p.Plaats {
+    text-align: center;
+}
+
+p.Jaar{
+    font-style: italic;
+}
+
+.table {
+    background-color: #f4f4f4;
+}
+
+    .table tr th {
+        background-color: #363B47;
+        color: #fff;
+        border-top: 0px solid !important;
+    }
+
+    .table tr td {
+        background-color: #f4f4f4;
+        color: #454E59;
+        border-top: 1px solid #E8E8E8 !important;
+    }

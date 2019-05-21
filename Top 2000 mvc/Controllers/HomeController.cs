@@ -92,13 +92,9 @@ namespace Top_2000_mvc.Controllers
             catch
 
             {
-
                 return View();
 
             }
-
         }
-
     }
-
 }
