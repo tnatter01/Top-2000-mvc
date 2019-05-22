@@ -49,13 +49,13 @@ namespace Top_2000_mvc.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Gebruikersnaam")]
+        [Display(Name = "UserName")]
 
         public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Wachtwoord")]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
         [Display(Name = "Onthouden?")]
@@ -80,12 +80,12 @@ namespace Top_2000_mvc.Models
         [Required]
         [StringLength(100, ErrorMessage = "De {0} moet minimaal {2} karakters lang zijn.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Wachtwoord")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Bevestig wachtwoord")]
-        [Compare("Wachtwoord", ErrorMessage = "De opgegeven wachtwoorden zijn niet hetzelfde.")]
+        [Compare("Password", ErrorMessage = "De opgegeven wachtwoorden zijn niet hetzelfde.")]
         public string ConfirmPassword { get; set; }
     }
 

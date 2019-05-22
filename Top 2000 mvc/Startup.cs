@@ -37,22 +37,7 @@ namespace Top_2000_mvc
                 role.Name = "Beheerder";
                 roleManager.Create(role);
 
-                //Here we create a Admin super user who will maintain the website                  
-
-                var user = new ApplicationUser();
-                user.UserName = "Twan";
-                user.Email = "tnatter01@student.rocvantwente.nl";
-
-                string userPWD = "Top2000!";
-
-                var chkUser = UserManager.Create(user, userPWD);
-
-                //Add default User to Role Admin   
-                if (chkUser.Succeeded)
-                {
-                    var result1 = UserManager.AddToRole(user.Id, "Beheerder");
-
-                }
+                //Here we create a Admin super user who will maintain the website                 
             }
 
             // creating Creating Employee role    
@@ -62,7 +47,21 @@ namespace Top_2000_mvc
                 role.Name = "Gebruiker";
                 roleManager.Create(role);
 
+                var user = new ApplicationUser();
+                user.UserName = "TestBeheerder";
+                user.Email = "Testbeheerder@student.rocvantwente.nl";
+                string userPWD = "Top2000!";
+                var chkUser = UserManager.Create(user, userPWD);
+                UserManager.AddToRole(user.Id, "Beheerder");
+
+                var user2 = new ApplicationUser();
+                user2.UserName = "TestGebruiker";
+                user2.Email = "Testgebruiker@student.rocvantwente.nl";
+                string user2PWD = "Top2000!";
+                var chkUser2 = UserManager.Create(user2, user2PWD);
+                UserManager.AddToRole(user2.Id, "Gebruiker");
             }
+
         }
     }
 }

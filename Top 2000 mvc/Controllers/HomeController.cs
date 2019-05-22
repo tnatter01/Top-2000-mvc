@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
@@ -67,34 +69,36 @@ namespace Top_2000_mvc.Controllers
 
         }
 
-        public ActionResult Edit(int id)
 
+        // GET: /Movies/Edit/5
+        public ActionResult Edit(int? id)
         {
-
-            return View();
-
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Liedje liedje = _db.Table.Find(id);
+            if (liedje == null)
+            {
+                return HttpNotFound();
+            }
+            return View(liedje);
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
-
-        public ActionResult Edit(int id, FormCollection collection)
-
+        // POST: /Movies/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Titel,Artiest,Jaar,Plaats")] Liedje liedje)
         {
-
-            try
-
+            if (ModelState.IsValid)
             {
-
+                _db.Entry(liedje).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
-
             }
-
-            catch
-
-            {
-                return View();
-
-            }
+            return View(liedje);
         }
     }
 }

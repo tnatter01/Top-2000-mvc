@@ -10,10 +10,13 @@
     <h1>Welkom. Hieronder kan je nieuwe rollen aanmaken.</h1>
     <h3>
         <li>@Html.ActionLink("Rollen aanmaken", "Index", "Role")</li>
+        <li>@Html.ActionLink("Ga naar Top 2000 lijst", "Index", "Home")</li>
     </h3>
 }
 else
 {
-    <h2>  Welcome <strong>@ViewBag.Name</strong> :) .We will add user module soon </h2>
+    <h2>  Welkom <strong>@ViewBag.Name</strong> . </h2>
+    <li>@Html.ActionLink("Ga naar Top 2000 lijst", "Index", "Home")</li>
+
 }
 
