@@ -26,50 +26,6 @@ namespace Top_2000_mvc.Controllers
 
         }
 
-
-    //
-
-        // GET: /Home/Create 
-
-        public ActionResult Create()
-
-        {
-
-            return View();
-
-        }
-
-        //
-
-        // POST: /Home/Create 
-
-        [AcceptVerbs(HttpVerbs.Post)]
-
-        public ActionResult Create(FormCollection collection)
-
-        {
-
-            try
-
-            {
-
-                // TODO: Add insert logic here 
-
-                return RedirectToAction("Index");
-
-            }
-
-            catch
-
-            {
-
-                return View();
-
-            }
-
-        }
-
-
         // GET: /Movies/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -99,6 +55,54 @@ namespace Top_2000_mvc.Controllers
                 return RedirectToAction("Index");
             }
             return View(liedje);
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Liedje liedje = _db.Table.Find(id);
+            if (liedje == null)
+            {
+                return HttpNotFound();
+            }
+            return View(liedje);
+        }
+
+        // POST: /Movies/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Liedje liedje = _db.Table.Find(id);
+            _db.Table.Remove(liedje);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Liedje newLiedje)
+        {
+
+            if (ModelState.IsValid)
+            {
+                _db.Table.Add(newLiedje);
+                _db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(newLiedje);
+            }
         }
     }
 }
