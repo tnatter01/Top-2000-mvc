@@ -46,12 +46,19 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+        if (ViewContext.HttpContext.User.IsInRole("Beheerder"))
+        {
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+        else
+        {
+            <h3>Je hebt niet de goede rol om dit liedje te verwijderen.</h3>
+        }
     }
 </div>
