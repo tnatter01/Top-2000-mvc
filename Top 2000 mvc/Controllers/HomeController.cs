@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
@@ -18,12 +19,17 @@ namespace Top_2000_mvc.Controllers
 
         private Top2000Entities _db = new Top2000Entities();
 
-        public ActionResult Index()
-
+        public async Task<ActionResult> Index(string searchString)
         {
+            var liedjes = from l in _db.Table
+                         select l;
 
-            return View(_db.Table.ToList());
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                liedjes = liedjes.Where(s => s.Titel.Contains(searchString) || s.Artiest.Contains(searchString));
+            }
 
+            return View(await liedjes.ToListAsync());
         }
 
         // GET: /Movies/Edit/5
