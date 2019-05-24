@@ -29,7 +29,7 @@ namespace Top_2000_mvc.Controllers
                 liedjes = liedjes.Where(s => s.Titel.Contains(searchString) || s.Artiest.Contains(searchString));
             }
 
-            return View(await liedjes.ToListAsync());
+            return View(await liedjes.OrderBy(a => a.Plaats).ToListAsync());
         }
 
         // GET: /Movies/Edit/5
