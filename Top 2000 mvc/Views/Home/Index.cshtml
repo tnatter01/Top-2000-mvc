@@ -3,22 +3,23 @@
 @{
     ViewBag.Title = "Index";
 }
+<div class="lijsttop">
+    <h2>Top 2000</h2>
+    @if (ViewContext.HttpContext.User.IsInRole("Beheerder"))
+    {
+        <p>
+            @Html.ActionLink("Nieuwe aanmaken", "Create")
+        </p>
+    }
 
-<h2>Top 2000</h2>
-@if (ViewContext.HttpContext.User.IsInRole("Beheerder"))
-{
-<p>
-    @Html.ActionLink("Nieuwe aanmaken", "Create")
-</p>
-}
 
+    <form asp-controller="Liedjes" asp-action="Index">
+        <p>
+            <input type="text" name="SearchString" placeholder="Zoeken op titel of artiest..." class="zoeken">
+        </p>
+    </form>
+</div>
 
-<form asp-controller="Liedjes" asp-action="Index">
-    <p>
-        Zoeken op titel of artiest: <input type="text" name="SearchString">
-        <input type="submit" value="Zoeken" />
-    </p>
-</form>
 <table class="table">
     <tr>
         <th>
@@ -39,7 +40,7 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+            <td class="Plaats">
                 <p class="Plaats">@Html.DisplayFor(modelItem => item.Plaats)</p>
             </td>
             <td>

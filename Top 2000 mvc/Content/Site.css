@@ -49,13 +49,37 @@ p.Jaar{
 }
 
     .table tr th {
-        background-color: #363B47;
-        color: #fff;
+        background-color: #E8E8E8;
+        color: #454E59;
         border-top: 0px solid !important;
     }
 
     .table tr td {
         background-color: #f4f4f4;
         color: #454E59;
-        border-top: 1px solid #E8E8E8 !important;
+        border-top: 1px solid #808080 !important;
     }
+
+
+td.Plaats {
+    background-color: #E8E8E8 !important;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    input.zoeken {
+    border: 1px solid #CB272E !important;
+    color: #CB272E;
+    padding: 5px;
+    width: 100%;
+}
+
+    input.zoeken::placeholder {
+        color: #CB272E;
+    }
+div.lijsttop {
+    background: #363b47;
+    color: #fff;
+    padding: 13px;
+    height: auto;
+}
