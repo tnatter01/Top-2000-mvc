@@ -5,6 +5,9 @@
 }
 <div class="lijsttop">
     <h2>Top 2000</h2>
+    <form asp-controller="Liedjes" asp-action="Index">
+        <input type="text" name="SearchString" placeholder="Zoeken op titel of artiest..." class="zoeken">
+    </form>
     @if (ViewContext.HttpContext.User.IsInRole("Beheerder"))
     {
         <p>
@@ -13,53 +16,53 @@
     }
 
 
-    <form asp-controller="Liedjes" asp-action="Index">
-        <p>
-            <input type="text" name="SearchString" placeholder="Zoeken op titel of artiest..." class="zoeken">
-        </p>
-    </form>
+
 </div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Plaats)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Titel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Artiest)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Jaar )
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<table id="lijst" class="table" data-sortable>
+    <thead>
         <tr>
-            <td class="Plaats">
-                <p class="Plaats">@Html.DisplayFor(modelItem => item.Plaats)</p>
-            </td>
-            <td>
-                <p class="Titel">@Html.DisplayFor(modelItem => item.Titel)</p>
-            </td>
-            <td>
-                <p class="Artiest">@Html.DisplayFor(modelItem => item.Artiest)</p>
-            </td>
-            <td class="Jaar">
-                <p class="Jaar">@Html.DisplayFor(modelItem => item.Jaar)</p>
-            </td>
-            @if (ViewContext.HttpContext.User.IsInRole("Beheerder"))
-            {
-                <td>
-                    @Html.ActionLink("Aanpassen", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Verwijderen", "Delete", new { id = item.Id })
-                </td>}
-
+            <th>
+                @Html.DisplayNameFor(model => model.Plaats)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Titel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Artiest)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Jaar)
+            </th>
+            <th></th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="Plaats">
+                    <p class="Plaats">@Html.DisplayFor(modelItem => item.Plaats)</p>
+                </td>
+                <td>
+                    <p class="Titel">@Html.DisplayFor(modelItem => item.Titel)</p>
+                </td>
+                <td>
+                    <p class="Artiest">@Html.DisplayFor(modelItem => item.Artiest)</p>
+                </td>
+                <td class="Jaar">
+                    <p class="Jaar">@Html.DisplayFor(modelItem => item.Jaar)</p>
+                </td>
+                @if (ViewContext.HttpContext.User.IsInRole("Beheerder"))
+                {
+                    <td>
+                        @Html.ActionLink("Aanpassen", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Verwijderen", "Delete", new { id = item.Id })
+                    </td>}
+
+            </tr>
+        }
+
+    </tbody>
 
 </table>

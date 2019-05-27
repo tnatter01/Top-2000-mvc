@@ -67,11 +67,13 @@ td.Plaats {
     font-weight: bold;
 }
 
-    input.zoeken {
+input.zoeken {
     border: 1px solid #CB272E !important;
     color: #CB272E;
     padding: 5px;
     width: 100%;
+    overflow: hidden;
+    float: right;
 }
 
     input.zoeken::placeholder {
@@ -81,5 +83,5 @@ div.lijsttop {
     background: #363b47;
     color: #fff;
     padding: 13px;
-    height: auto;
+    height: 120px;
 }
