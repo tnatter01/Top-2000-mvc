@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<Top_2000_mvc.Models.Liedje>
-
 @{
     ViewBag.Title = "Index";
 }
@@ -14,9 +13,6 @@
             @Html.ActionLink("Nieuwe aanmaken", "Create")
         </p>
     }
-
-
-
 </div>
 
 <table id="lijst" class="table" data-sortable>
@@ -56,13 +52,11 @@
                 @if (ViewContext.HttpContext.User.IsInRole("Beheerder"))
                 {
                     <td>
-                        @Html.ActionLink("Aanpassen", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Verwijderen", "Delete", new { id = item.Id })
+                        <i class="fas fa-edit">@Html.ActionLink("Aanpassen", "Edit", new { id = item.Id })</i>
+                |
+                        <i class="fas fa-trash-alt">@Html.ActionLink("Verwijderen", "Delete", new { id = item.Id })</i>
                     </td>}
-
             </tr>
         }
-
     </tbody>
-
 </table>
