@@ -19,6 +19,8 @@
     <thead>
         <tr>
             <th>
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Plaats)
             </th>
             <th>
@@ -36,27 +38,35 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td class="Plaats">
-                    <p class="Plaats">@Html.DisplayFor(modelItem => item.Plaats)</p>
-                </td>
+        <tr>
+            <td class="Afbeelding">
+                <span>
+                    @if (File.Exists(@"C:\Users\Twan.DESKTOP-EGNS0QB\source\repos\Top-2000-mvc\Top 2000 mvc\Content\images\songs\" + item.Id + ".jpg"))
+                    {
+                        <img alt="@(item.Titel)" class="lijstfoto" src="~/Content/images/songs/@(item.Id).jpg" />
+                    }
+                </span>
+            </td>
+            <td class="Plaats">
+                <p class="Plaats">@Html.DisplayFor(modelItem => item.Plaats)</p>
+            </td>
+            <td>
+                <p class="Titel">@Html.DisplayFor(modelItem => item.Titel)</p>
+            </td>
+            <td>
+                <p class="Artiest">@Html.DisplayFor(modelItem => item.Artiest)</p>
+            </td>
+            <td class="Jaar">
+                <p class="Jaar">@Html.DisplayFor(modelItem => item.Jaar)</p>
+            </td>
+            @if (ViewContext.HttpContext.User.IsInRole("Beheerder"))
+            {
                 <td>
-                    <p class="Titel">@Html.DisplayFor(modelItem => item.Titel)</p>
-                </td>
-                <td>
-                    <p class="Artiest">@Html.DisplayFor(modelItem => item.Artiest)</p>
-                </td>
-                <td class="Jaar">
-                    <p class="Jaar">@Html.DisplayFor(modelItem => item.Jaar)</p>
-                </td>
-                @if (ViewContext.HttpContext.User.IsInRole("Beheerder"))
-                {
-                    <td>
-                        <i class="fas fa-edit">@Html.ActionLink("Aanpassen", "Edit", new { id = item.Id })</i>
-                |
-                        <i class="fas fa-trash-alt">@Html.ActionLink("Verwijderen", "Delete", new { id = item.Id })</i>
-                    </td>}
-            </tr>
+                    <i class="fas fa-edit">@Html.ActionLink("Aanpassen", "Edit", new { id = item.Id })</i>
+                    |
+                    <i class="fas fa-trash-alt">@Html.ActionLink("Verwijderen", "Delete", new { id = item.Id })</i>
+                </td>}
+        </tr>
         }
     </tbody>
 </table>
