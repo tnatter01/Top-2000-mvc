@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Data.Entity;
-using System.Web;
+﻿using System.Linq;
 using Top_2000_mvc.Models;
 using System.Web.Mvc;
+using System.Data;
+using System;
+using System.Data.SqlClient;
+using System.ComponentModel;
 
 namespace Top_2000_mvc.Controllers
 {
@@ -14,22 +14,26 @@ namespace Top_2000_mvc.Controllers
 
 
         // GET: Lijst
-        public ActionResult Index()
+        public ActionResult Index([DefaultValue(2018)]int jaar)
         {
-            var liedjes = from Lijst in db.Lijst
-                          where
-                            Lijst.top2000jaar == 2018
-                          orderby
-                            Lijst.positie
-                          select new
-                          {
-                              Lijst.positie,
-                              Lijst.Song.titel,
-                              Lijst.Song.Artiest.naam,
-                              Lijst.Song.jaar
-                          };
-
-            return View(liedjes.ToList());
+            String constring = "Server=localhost;Database=TOP2000;Integrated Security=SSPI";
+            SqlConnection sqlcon = new SqlConnection(constring);
+            String pname = "spGetListByYear";
+            sqlcon.Open();
+            SqlCommand com = new SqlCommand(pname, sqlcon);
+            com.CommandType = CommandType.StoredProcedure;
+            if(jaar == 2018) { 
+            com.Parameters.Add(
+            new SqlParameter("@YEAR", 2018));
+            } else
+            {
+                com.Parameters.Add(
+                            new SqlParameter("@YEAR", 2018));
+            }
+            SqlDataReader dr = com.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            return View(dt);
         }
 
         // GET: Lijst/Details/5

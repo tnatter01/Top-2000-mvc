@@ -25,6 +25,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Lijst", "Index", "Lijst")</li>
                     @if (ViewContext.HttpContext.User.IsInRole("Beheerder"))
                     {
                         <li>@Html.ActionLink("Liedjes", "Index", "Songs")</li>
