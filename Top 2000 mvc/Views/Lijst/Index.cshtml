@@ -1,8 +1,36 @@
 ﻿@using System.Data;
-<div class="lijsttop">
-    <h2>Top 2000</h2>
-    <p><a href="?jaar=2018">2018</a> | <a href="?jaar=2017">2017</a> | <a href="?jaar=2016">2016</a> | <a href="?jaar=2015">2015</a> | <a href="?jaar=2014">2014</a> | <a href="?jaar=2013">2013</a> | <a href="?jaar=2012">2012</a> | <a href="?jaar=2011">2011</a> | <a href="?jaar=2010">2010</a> | <a href="?jaar=2009">2009</a> | <a href="?jaar=2008">2008</a> | <a href="?jaar=2007">2007</a> | <a href="?jaar=2006">2006</a> | <a href="?jaar=2005">2005</a> | <a href="?jaar=2004">2004</a> | <a href="?jaar=2003">2003</a> | <a href="?jaar=2002">2002</a> | <a href="?jaar=2001">2001</a> | <a href="?jaar=2000">2000</a></p>
-</div>
+    <div class="lijsttop">
+        <h2>Top 2000</h2>
+        <form asp-controller="Lijst" asp-action="Index">
+            <input type="text" name="ZoekString" placeholder="Zoeken op titel of artiest..." class="zoeken">
+            <select class="selectJaar" name="jaar">
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
+                <option value="2016">2016</option>
+                <option value="2015">2015</option>
+                <option value="2014">2014</option>
+                <option value="2013">2013</option>
+                <option value="2012">2012</option>
+                <option value="2011">2011</option>
+                <option value="2010">2010</option>
+                <option value="2009">2009</option>
+                <option value="2008">2008</option>
+                <option value="2007">2007</option>
+                <option value="2006">2006</option>
+                <option value="2005">2005</option>
+                <option value="2004">2004</option>
+                <option value="2003">2003</option>
+                <option value="2002">2002</option>
+                <option value="2001">2001</option>
+                <option value="2000">2002</option>
+
+            </select>
+        </form>
+        <!--
+            
+            <option value="2017">2017</option><p><a href="?jaar=2018">2018</a> | <a href="?jaar=2017">2017</a> | <a href="?jaar=2016">2016</a> | <a href="?jaar=2015">2015</a> | <a href="?jaar=2014">2014</a> | <a href="?jaar=2013">2013</a> | <a href="?jaar=2012">2012</a> | <a href="?jaar=2011">2011</a> | <a href="?jaar=2010">2010</a> | <a href="?jaar=2009">2009</a> | <a href="?jaar=2008">2008</a> | <a href="?jaar=2007">2007</a> | <a href="?jaar=2006">2006</a> | <a href="?jaar=2005">2005</a> | <a href="?jaar=2004">2004</a> | <a href="?jaar=2003">2003</a> | <a href="?jaar=2002">2002</a> | <a href="?jaar=2001">2001</a> | <a href="?jaar=2000">2000</a></p>
+    -->
+            </div>
 <table id="lijst" class="table" data-sortable>
     <thead>
         <tr>

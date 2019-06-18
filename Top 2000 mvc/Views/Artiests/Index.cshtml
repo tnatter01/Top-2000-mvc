@@ -15,6 +15,7 @@
             @Html.DisplayNameFor(model => model.naam)
         </th>
         <th></th>
+        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -23,10 +24,13 @@
             @Html.DisplayFor(modelItem => item.naam)
         </td>
         <td>
+            @Html.ActionLink("Aantal noteringen", "AantalSongs", new { jaar = 2018, ArtiestId = item.artiestid})
+        </td>
+        <td>
             @if (ViewContext.HttpContext.User.IsInRole("Beheerder"))
             {
-                @Html.ActionLink("Edit", "Edit", new { id = item.artiestid }) |
-@Html.ActionLink("Details", "Details", new { id = item.artiestid }) |
+                @Html.ActionLink("Edit | ", "Edit", new { id = item.artiestid }) 
+                @Html.ActionLink("Details | ", "Details", new { id = item.artiestid })
             @Html.ActionLink("Delete", "Delete", new { id = item.artiestid })
             }
         </td>

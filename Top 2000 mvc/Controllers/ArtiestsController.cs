@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -18,6 +20,22 @@ namespace Top_2000_mvc.Controllers
         public ActionResult Index()
         {
             return View(db.Artiest.ToList());
+        }
+
+        public ActionResult AantalSongs([DefaultValue(2018)]int jaar, [DefaultValue("4671")]int ArtiestId)
+        {
+            String constring = "Server=localhost;Database=TOP2000;Integrated Security=SSPI";
+            SqlConnection sqlcon = new SqlConnection(constring);
+            String pname = "spAantalSongsPerArtiest";
+            sqlcon.Open();
+            SqlCommand com = new SqlCommand(pname, sqlcon);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.Add(new SqlParameter("@Year", jaar));
+            com.Parameters.Add(new SqlParameter("@ArtiestId", ArtiestId));
+            SqlDataReader dr = com.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            return View(dt);
         }
 
         // GET: Artiests/Details/5

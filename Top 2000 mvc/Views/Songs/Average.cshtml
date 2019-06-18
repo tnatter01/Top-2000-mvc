@@ -1,0 +1,26 @@
+﻿@using System.Data;
+
+@{
+    ViewBag.Title = "Average";
+}
+
+<h2>Average</h2>
+@foreach (DataRow row in Model.Rows)
+{
+    <p>De gemiddelde positie van @row["titel"] is <b>@row["result"]</b>.</p>
+
+    <dl class="dl-horizontal">
+        <dt>
+            Titel
+        </dt>
+        <dd>
+            @row["titel"]
+        </dd>
+        <dt>
+            Gemiddelde notering
+        </dt>
+        <dd>
+            @row["result"]
+        </dd>
+    </dl>
+}

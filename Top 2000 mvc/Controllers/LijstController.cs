@@ -14,13 +14,21 @@ namespace Top_2000_mvc.Controllers
 
 
         // GET: Lijst
-        public ActionResult Index([DefaultValue(2018)]int jaar)
+        public ActionResult Index([DefaultValue(2018)]int jaar, [DefaultValue("NULL")]string ZoekString)
         {
             String constring = "Server=localhost;Database=TOP2000;Integrated Security=SSPI";
             SqlConnection sqlcon = new SqlConnection(constring);
             String pname = "spGetListByYear";
+            if(ZoekString != "NULL")
+            {
+                pname = "spSearchListByYear";
+            }
             sqlcon.Open();
             SqlCommand com = new SqlCommand(pname, sqlcon);
+            if (ZoekString != "NULL")
+            {
+                com.Parameters.Add("@ZOEKOPDRACHT", ZoekString);
+            }
             com.CommandType = CommandType.StoredProcedure;
             if(jaar == 2018) { 
             com.Parameters.Add(
@@ -28,7 +36,7 @@ namespace Top_2000_mvc.Controllers
             } else
             {
                 com.Parameters.Add(
-                            new SqlParameter("@YEAR", 2018));
+                            new SqlParameter("@YEAR", jaar));
             }
             SqlDataReader dr = com.ExecuteReader();
             DataTable dt = new DataTable();

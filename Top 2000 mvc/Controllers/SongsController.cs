@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -21,6 +23,20 @@ namespace Top_2000_mvc.Controllers
             return View(song.ToList());
         }
 
+        public ActionResult Average([DefaultValue("4671")]int SongId)
+        {
+            String constring = "Server=localhost;Database=TOP2000;Integrated Security=SSPI";
+            SqlConnection sqlcon = new SqlConnection(constring);
+            String pname = "spAvgPositiePerSong";
+            sqlcon.Open();
+            SqlCommand com = new SqlCommand(pname, sqlcon);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.Add(new SqlParameter("@SongId", SongId));
+            SqlDataReader dr = com.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            return View(dt);
+        }
         // GET: Songs/Details/5
         public ActionResult Details(int? id)
         {
