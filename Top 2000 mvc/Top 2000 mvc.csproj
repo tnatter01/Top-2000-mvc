@@ -359,6 +359,8 @@
     <Content Include="Views\Lijst\Index.cshtml" />
     <Content Include="Views\Artiests\AantalSongs.cshtml" />
     <Content Include="Views\Songs\Average.cshtml" />
+    <Content Include="Views\Songs\Positie.cshtml" />
+    <Content Include="Views\Lijst\top10.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

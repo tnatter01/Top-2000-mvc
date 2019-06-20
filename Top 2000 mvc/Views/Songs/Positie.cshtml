@@ -1,0 +1,24 @@
+﻿@using System.Data;
+
+@{
+    ViewBag.Title = "Positie";
+}
+    <table class="tablepositie">
+        <tr>
+            <h2>Positie per jaar</h2>
+            @foreach (DataRow row in Model.Rows)
+            {
+                <th class="tablehead">
+                    @row["top2000jaar"] 
+                </th>
+            }
+        </tr>
+        <tr>
+            @foreach (DataRow row in Model.Rows)
+            {
+                <td>
+                    @row["positie"] 
+                </td>
+            }
+        </tr>
+        </table>

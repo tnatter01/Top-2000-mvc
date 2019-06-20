@@ -24,17 +24,23 @@ namespace Top_2000_mvc.Controllers
 
         public ActionResult AantalSongs([DefaultValue(2018)]int jaar, [DefaultValue("4671")]int ArtiestId)
         {
+            //Connectie maken met sql server database
             String constring = "Server=localhost;Database=TOP2000;Integrated Security=SSPI";
             SqlConnection sqlcon = new SqlConnection(constring);
+            //Selecteer welke stored procedure er gebruikt moet worden
             String pname = "spAantalSongsPerArtiest";
+            //Connectie openen
             sqlcon.Open();
+            //Voer de stored procedure uit
             SqlCommand com = new SqlCommand(pname, sqlcon);
             com.CommandType = CommandType.StoredProcedure;
+            //Voeg parameters toe aan de stored procedures
             com.Parameters.Add(new SqlParameter("@Year", jaar));
             com.Parameters.Add(new SqlParameter("@ArtiestId", ArtiestId));
             SqlDataReader dr = com.ExecuteReader();
             DataTable dt = new DataTable();
             dt.Load(dr);
+            //Stuur de resultaten terug in een datatable naar een view
             return View(dt);
         }
 

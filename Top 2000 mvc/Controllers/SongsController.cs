@@ -23,19 +23,47 @@ namespace Top_2000_mvc.Controllers
             return View(song.ToList());
         }
 
-        public ActionResult Average([DefaultValue("4671")]int SongId)
+        public ActionResult Average([DefaultValue(4671)]int SongId)
         {
+            //Connectie maken met de lokale sql server database
             String constring = "Server=localhost;Database=TOP2000;Integrated Security=SSPI";
             SqlConnection sqlcon = new SqlConnection(constring);
+            //Selecteer welke stored procedure gebruikt moet worden
             String pname = "spAvgPositiePerSong";
+            //Open connectie met sql server database
             sqlcon.Open();
             SqlCommand com = new SqlCommand(pname, sqlcon);
+            //Zeg dat het uitgevoerd moet worden als stored procedure
             com.CommandType = CommandType.StoredProcedure;
+            //Voeg parameters toe aan de stored procedure
+            com.Parameters.Add(new SqlParameter("@SongId", SongId));
+            //Voer stored procedure uit, en lees resultaten uit
+            SqlDataReader dr = com.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            //Stuur de resultaten terug in een datatable naar een view
+            return View(dt);
+        }
+
+        public ActionResult Positie([DefaultValue(8357)]int SongId)
+        {
+            //Connectie maken met de lokale sql server database
+            String constring = "Server=localhost;Database=TOP2000;Integrated Security=SSPI";
+            SqlConnection sqlcon = new SqlConnection(constring);
+            //Selecteer welke stored procedure gebruikt moet worden
+            String pname = "spPlaatsPerJaar";
+            //Open connectie met sql server database
+            sqlcon.Open();
+            SqlCommand com = new SqlCommand(pname, sqlcon);
+            //Zeg dat het uitgevoerd moet worden als stored procedure
+            com.CommandType = CommandType.StoredProcedure;
+            //Voeg parameters toe aan de stored procedure
             com.Parameters.Add(new SqlParameter("@SongId", SongId));
             SqlDataReader dr = com.ExecuteReader();
             DataTable dt = new DataTable();
             dt.Load(dr);
-            return View(dt);
+            //Stuur de resultaten terug in een datatable naar een view
+            return View(dt); 
         }
         // GET: Songs/Details/5
         public ActionResult Details(int? id)

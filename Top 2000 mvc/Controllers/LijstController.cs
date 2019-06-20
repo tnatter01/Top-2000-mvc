@@ -16,34 +16,61 @@ namespace Top_2000_mvc.Controllers
         // GET: Lijst
         public ActionResult Index([DefaultValue(2018)]int jaar, [DefaultValue("NULL")]string ZoekString)
         {
+            //Connectie maken met de lokale sql server database
             String constring = "Server=localhost;Database=TOP2000;Integrated Security=SSPI";
             SqlConnection sqlcon = new SqlConnection(constring);
+            //Selecteer welke stored procedure er uitgevoerd moet worden
             String pname = "spGetListByYear";
+            //Als er een zoekstring is ingevuld gebruik de stored procedure waarmee gezocht kan worden
             if(ZoekString != "NULL")
-            {
-                pname = "spSearchListByYear";
-            }
+            { pname = "spSearchListByYear"; }
+            //Open de sql connectie
             sqlcon.Open();
             SqlCommand com = new SqlCommand(pname, sqlcon);
+            //Als er een zoekstring is ingevuld voeg deze als parameter toe aan de stored procedure
             if (ZoekString != "NULL")
             {
                 com.Parameters.Add("@ZOEKOPDRACHT", ZoekString);
             }
             com.CommandType = CommandType.StoredProcedure;
-            if(jaar == 2018) { 
-            com.Parameters.Add(
-            new SqlParameter("@YEAR", 2018));
-            } else
+            //Als jaar niet gelijk is aan 2018 voeg het jaar toe als parameter aan de stored procedure
+            if(jaar != 2018) 
             {
                 com.Parameters.Add(
                             new SqlParameter("@YEAR", jaar));
             }
+            //Voer de stored procedure uit in de database
             SqlDataReader dr = com.ExecuteReader();
             DataTable dt = new DataTable();
             dt.Load(dr);
+            //Stuur de resultaten terug in een datatable naar een view
             return View(dt);
         }
 
+        public ActionResult top10([DefaultValue(2018)]int jaar)
+        {
+            //Connectie maken met de lokale sql server database
+            String constring = "Server=localhost;Database=TOP2000;Integrated Security=SSPI";
+            SqlConnection sqlcon = new SqlConnection(constring);
+            //Selecteer welke stored procedure er uitgevoerd moet worden
+            String pname = "spTop10ByYear";
+            //Open de sql connectie
+            sqlcon.Open();
+            SqlCommand com = new SqlCommand(pname, sqlcon);
+            com.CommandType = CommandType.StoredProcedure;
+            //Als jaar niet gelijk is aan 2018 voeg het jaar toe als parameter aan de stored procedure
+            if (jaar != 2018)
+            {
+                com.Parameters.Add(
+                            new SqlParameter("@YEAR", jaar));
+            }
+            //Voer de stored procedure uit in de database
+            SqlDataReader dr = com.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            //Stuur de resultaten terug in een datatable naar een view
+            return View(dt);
+        }
         // GET: Lijst/Details/5
         public ActionResult Details(int id)
         {
