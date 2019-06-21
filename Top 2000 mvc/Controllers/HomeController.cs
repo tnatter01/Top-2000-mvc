@@ -21,14 +21,17 @@ namespace Top_2000_mvc.Controllers
 
         public async Task<ActionResult> Index(string searchString)
         {
+            //haal alle liedjes uit database met lambda
             var liedjes = from l in _db.Table
                          select l;
 
+            //Als de parameter searchString wordt meegegeven, selecteer alle liedjes waarvan 
+            //de titel of artiest hetzelfde is al de parameter
             if (!String.IsNullOrEmpty(searchString))
             {
                 liedjes = liedjes.Where(s => s.Titel.Contains(searchString) || s.Artiest.Contains(searchString));
             }
-
+            //Stuurt view terug met een lijst van de liedjes gesorteerd op de positie
             return View(await liedjes.OrderBy(a => a.Plaats).ToListAsync());
         }
 

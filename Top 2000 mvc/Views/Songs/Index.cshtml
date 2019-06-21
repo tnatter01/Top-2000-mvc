@@ -44,7 +44,8 @@
         @Html.DisplayFor(modelItem => item.Artiest.naam)
     </td>
     <td>
-        @Html.ActionLink("Gemiddelde notering", "Average", new { SongId = item.songid })
+        @Html.ActionLink("Gemiddelde notering", "Average", new { SongId = item.songid }) <br /> 
+        @Html.ActionLink("Posities per jaar", "Positie", new { SongId = item.songid })
     </td>
     <td>
         @if (ViewContext.HttpContext.User.IsInRole("Beheerder"))

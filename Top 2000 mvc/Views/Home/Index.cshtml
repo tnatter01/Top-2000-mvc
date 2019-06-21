@@ -2,18 +2,28 @@
 @{
     ViewBag.Title = "Index";
 }
-<div class="lijsttop">
-    <h2>Top 2000</h2>
-    <form asp-controller="Liedjes" asp-action="Index">
-        <input type="text" name="SearchString" placeholder="Zoeken op titel of artiest..." class="zoeken">
-    </form>
-    @if (ViewContext.HttpContext.User.IsInRole("Beheerder"))
-    {
-        <p>
-            @Html.ActionLink("Nieuwe aanmaken", "Create")
-        </p>
-    }
-</div>
+    <div class="lijsttop col-md-12">
+        <div class="row">
+            <div class="col-md-4"><h2>Top 2000</h2></div>
+            <div class="col-md-8"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                @if (ViewContext.HttpContext.User.IsInRole("Beheerder"))
+                {
+                    <p>
+                        @Html.ActionLink("Nieuwe aanmaken", "Create")
+                    </p>
+                }
+            </div>  
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <form asp-controller="Liedjes" asp-action="Index">
+                    <input type="text" name="SearchString" placeholder="Zoeken op titel of artiest..." class="zoeken">
+                </form>
+            </div>
+        </div>
+    </div>
 
 <table id="lijst" class="table" data-sortable>
     <thead>

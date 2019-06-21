@@ -1,12 +1,12 @@
 ﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
-$(document).ready(function(){
-  jQuery(function() {
-    jQuery('#jaarselect').change(function() {
-        this.form.submit();
+    $(document).ready(function () {
+        jQuery(function () {
+            jQuery('#jaarselect').change(function () {
+                this.form.submit();
+            });
+        });
     });
-});
-});
 </script>
 
 @using System.Data;
@@ -35,6 +35,8 @@ $(document).ready(function(){
             <option value="2000">2000</option>
         </select>
     </form>
+    @Html.ActionLink("Terug naar lijst", "Index")
+
 </div>
 <table id="lijst" class="table" data-sortable>
     <thead>
